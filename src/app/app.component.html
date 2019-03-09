@@ -1,20 +1,63 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<!--<form [formGroup]="fb">-->
+  <!--<div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" formControlName="demo">-->
+    <!--<label ngbButtonLabel class="btn-primary">-->
+      <!--<input ngbButton type="radio" value="geojson"> GeoJSON Tests-->
+    <!--</label>-->
+    <!--<label ngbButtonLabel class="btn-primary">-->
+      <!--<input ngbButton type="radio" value="radioBtns"> Radio Buttons-->
+    <!--</label>-->
+    <!--<label ngbButtonLabel class="btn-primary">-->
+      <!--<input ngbButton type="radio" value="mapboxDraw"> Mapbox Draw-->
+    <!--</label>-->
+    <!--<label ngbButtonLabel class="btn-primary">-->
+      <!--<input ngbButton type="radio" value="turf"> Turf.js-->
+    <!--</label>-->
+  <!--</div>-->
+<!--</form>-->
+<!--<hr>-->
+<!--<div *ngIf="fb.value.demo === 'geojson'">-->
+  <!--<app-geojson-test></app-geojson-test>-->
+<!--</div>-->
+<!--<div *ngIf="fb.value.demo === 'radioBtns'">-->
+  <!--<app-radio-buttons></app-radio-buttons>-->
+<!--</div>-->
+<!--<div *ngIf="fb.value.demo === 'mapboxDraw'">-->
+  <!--<app-mapbox-draw></app-mapbox-draw>-->
+<!--</div>-->
+<!--<div *ngIf="fb.value.demo === 'turf'">-->
+  <!--<app-turf></app-turf>-->
+<!--</div>-->
 
+<mat-button-toggle-group #group="matButtonToggleGroup" value="image-catalog">
+  <mat-button-toggle value="geojson">
+    GEOJSON TESTS
+  </mat-button-toggle>
+  <mat-button-toggle value="radio">
+    RADIO BUTTONS
+  </mat-button-toggle>
+  <mat-button-toggle value="mapbox-draw">
+    MAPBOX DRAW
+  </mat-button-toggle>
+  <mat-button-toggle value="turf">
+    TURF.JS
+  </mat-button-toggle>
+  <mat-button-toggle value="image-catalog">
+    IMAGE CATALOG
+  </mat-button-toggle>
+</mat-button-toggle-group>
+<hr>
+<div *ngIf="group.value === 'geojson'">
+  <app-geojson-test></app-geojson-test>
+</div>
+<div *ngIf="group.value === 'radio'">
+  <app-radio-buttons></app-radio-buttons>
+</div>
+<div *ngIf="group.value === 'mapbox-draw'">
+  <app-mapbox-draw></app-mapbox-draw>
+</div>
+<div *ngIf="group.value === 'turf'">
+  <app-turf></app-turf>
+</div>
+<div *ngIf="group.value === 'image-catalog'">
+  <app-image-catalog></app-image-catalog>
+</div>

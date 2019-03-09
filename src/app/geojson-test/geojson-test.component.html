@@ -1,0 +1,54 @@
+<mgl-map
+  [style]="'mapbox://styles/mapbox/light-v9'"
+  [zoom]="[1]"
+  [center]="[20, 20]"
+>
+  <!--<mgl-layer-->
+  <!--id="maine"-->
+  <!--type="fill"-->
+  <!--[source]="maine">-->
+  <!--</mgl-layer>-->
+
+  <!--<mgl-layer-->
+  <!--id="china"-->
+  <!--type="fill"-->
+  <!--[source]="china">-->
+  <!--</mgl-layer>-->
+
+  <!--<mgl-layer-->
+  <!--id="volcano"-->
+  <!--type="fill"-->
+  <!--[source]="volcano">-->
+  <!--</mgl-layer>-->
+
+  <!--<mgl-layer-->
+  <!--id="africa"-->
+  <!--type="fill"-->
+  <!--[paint]="style"-->
+  <!--[source]="africa">-->
+  <!--</mgl-layer>-->
+
+  <!--<mgl-layer-->
+  <!--id="africaLines"-->
+  <!--type="line"-->
+  <!--[paint]="styleLines"-->
+  <!--[source]="africa">-->
+  <!--</mgl-layer>-->
+
+  <mgl-layer
+    id="global"
+    type="fill"
+    [paint]="style"
+    [source]="region">
+  </mgl-layer>
+
+</mgl-map>
+<form [formGroup]="form">
+  <select formControlName="subscription"
+          class="form-field"
+          (change)="registerOnChange()">
+    <option value="Global">Global</option>
+    <option value="China">China</option>
+    <option value="Africa">Africa</option>
+  </select>
+</form>

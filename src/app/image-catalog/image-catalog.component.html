@@ -1,0 +1,159 @@
+<div id="container">
+<div id="map-catalog"></div>
+<!--<div id="geo-search-container">-->
+  <!--<h4>MAP SEARCH</h4>-->
+  <!--Begin searching for images by selecting an <b>area of interest on the map</b>.-->
+  <!--<hr>-->
+  <!--<div class="image-filter" *ngIf="drawnPolygons">-->
+    <!--<h4>IMAGE CATALOG FILTER</h4>-->
+    <!--<mat-form-field>-->
+      <!--<mat-select placeholder="DOMAIN">-->
+        <!--<mat-option value="sar">Synthetic Aperture Radar (SAR)</mat-option>-->
+      <!--</mat-select>-->
+    <!--</mat-form-field>-->
+    <!--<mat-form-field>-->
+      <!--<mat-select placeholder="MODE">-->
+        <!--<mat-option value="strip">Strip</mat-option>-->
+      <!--</mat-select>-->
+    <!--</mat-form-field>-->
+
+    <!--<mat-form-field>-->
+      <!--<mat-select placeholder="RESOLUTION">-->
+        <!--<mat-option value="5m">< 5m</mat-option>-->
+      <!--</mat-select>-->
+    <!--</mat-form-field>-->
+
+    <!--<mat-form-field>-->
+      <!--<mat-select placeholder="ACQUISITION ANGLE">-->
+        <!--<mat-option value="20-40">20 - 40 degrees</mat-option>-->
+      <!--</mat-select>-->
+    <!--</mat-form-field>-->
+
+    <!--<div class="button-container">-->
+      <!--<button mat-raised-button color="primary">VIEW RESULTS</button>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
+<!--<div id="catalog-draw-container"></div>-->
+
+
+<!--<div class="menu-container">-->
+  <div class='geo-search-container'>
+    <h4>MAP SEARCH</h4>
+    Begin searching for images by selecting an area of interest on the map using the polygon draw tool to the right.
+    <hr>
+    <form [formGroup]="form">
+
+    <div class="image-filter" *ngIf="drawnPolygons">
+      <h4>IMAGE CATALOG FILTER</h4>
+      <mat-form-field>
+        <mat-select placeholder="DOMAIN" formControlName="domain">
+          <mat-option value="sar">Synthetic Aperture Radar (SAR)</mat-option>
+          <mat-option value="or">Optical Radar</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="MODE" formControlName="mode">
+          <mat-option value="strip">Strip</mat-option>
+          <mat-option value="flip">Flip</mat-option>
+          <mat-option value="doot">Doot</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="RESOLUTION" formControlName="resolution">
+          <mat-option value="5m">< 5m</mat-option>
+          <mat-option value="50m">5m - 50m</mat-option>
+          <mat-option value="100m">> 50m</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="ACQUISITION ANGLE" formControlName="angle">
+          <mat-option value="0-20">0 - 20 degrees</mat-option>
+          <mat-option value="20-40">20 - 40 degrees</mat-option>
+          <mat-option value="40-60">40 - 60 degrees</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <br>
+      <div class="button-container"
+           [matTooltip]="!form.valid ? 'ALL FORM FIELDS REQUIRED' : ''"
+           matTooltipPosition="above"
+           matTooltipClass="form-tooltip">
+        <button mat-raised-button
+                [color]="buttonType"
+                [disabled]="!form.valid"
+                (click)="onViewResults()">{{ resultsButtonText }}</button>
+      </div>
+    </div>
+
+    </form>
+
+
+  </div>
+<div id="catalog-draw-container"></div>
+
+<div id="image-catalog" *ngIf="viewResults && drawnPolygons">
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <!--<mat-checkbox (change)="$event ? masterToggle() : null"-->
+                      <!--[checked]="selection.hasValue() && isAllSelected()"-->
+                      <!--[indeterminate]="selection.hasValue() && !isAllSelected()">-->
+        <!--</mat-checkbox>-->
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (click)="onClick()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> Footprint ID </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Domain </th>
+      <td mat-cell *matCellDef="let element"> {{element.domain}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="weight">
+      <th mat-header-cell *matHeaderCellDef> Mode </th>
+      <td mat-cell *matCellDef="let element"> {{element.mode}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="symbol">
+      <th mat-header-cell *matHeaderCellDef> Resolution </th>
+      <td mat-cell *matCellDef="let element"> {{element.resolution}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="symbol2">
+      <th mat-header-cell *matHeaderCellDef> Acquisition Angle </th>
+      <td mat-cell *matCellDef="let element"> {{element.angle}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+        (click)="selection.toggle(row)">
+    </tr>
+  </table>
+
+
+</div>
+
+<!--</div>-->
+</div>

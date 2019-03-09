@@ -1,0 +1,35 @@
+<div id="map"></div>
+<div class="menu-container">
+  <div class='map-overlay top'>
+      <div id="geocoder" class="geocoder"></div>
+    <br>
+    <mat-form-field>
+      <mat-select placeholder="DOMAIN">
+        <mat-option value="sar">Synthetic Aperture Radar (SAR)</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="MODE">
+        <mat-option value="strip">Strip</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="RESOLUTION">
+        <mat-option value="5m">< 5m</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="ACQUISITION ANGLE">
+        <mat-option value="20-40">20 - 40 degrees</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="button-container">
+      <button mat-raised-button color="primary">VIEW RESULTS</button>
+    </div>
+  </div>
+  <div id="draw-container" class="draw-container"></div>
+</div>
